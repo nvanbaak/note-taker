@@ -43,10 +43,7 @@ app.get("/api/notes/:id", function (req, res) {
     console.log(id);
 
     // Read the database
-    let notesDB = [];
-    notesDB = readDB();
-    console.log(notesDB);
-    console.log(notesDB.length);
+    let notesDB = readDB();
 
     // Search the databse for an article with that title
     for (let i = 0; i < notesDB.length; i++) {
