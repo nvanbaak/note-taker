@@ -82,7 +82,36 @@ app.post("/api/notes", function (req, res) {
 
     // Push to database
     db.push(newNote);
+
+    res.send("POST request received!")
 });
+
+// DELETE
+
+app.delete("/api/notes/:id", function (req, res) {
+
+    // Get id
+    let target = req.params.id;
+
+    // Load the database
+    let db = readDB();
+
+    // Run through the database
+    for (i in db) {
+        // if the note title matches the target
+        if (db[i].title === target) {
+            // splice it out of the database
+            db.splice(i, 1, "");
+
+            // save the database
+            storeDB(db);
+
+            // And exit the function
+            return res.send(`Deleted '${target}' from database!`)
+        }
+    }
+
+})
 
 
 // ===============================
