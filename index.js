@@ -110,7 +110,6 @@ app.delete("/api/notes/:id", function (req, res) {
             return res.send(`Deleted '${target}' from database!`)
         }
     }
-
 })
 
 
