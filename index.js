@@ -15,8 +15,8 @@ const app = express();
 const PORT = process.env.PORT || 9164;
 
 // Gives us more options for POST requests
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
+app.use(express.urlencoded({ extended: true })); // application/x-www-form-urlencoded
+app.use(express.json()); // application/json
 
 // Listener function
 app.listen(PORT, function() {
@@ -69,7 +69,20 @@ app.get("*", function (req, res) {
 
 // POST
 
-app.post("")
+app.post("/api/notes", function (req, res) {
+
+    // Make an object using the data sent
+    let newNote = {
+        title:req.body.title,
+        content:req.title.content
+    }
+
+    // Load the database
+    let db = readDB();
+
+    // Push to database
+    db.push(newNote);
+});
 
 
 // ===============================
