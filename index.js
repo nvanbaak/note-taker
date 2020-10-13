@@ -28,6 +28,8 @@ app.listen(PORT, function() {
 //               Routing
 // =======================================
 
+// GET
+
 app.get("/", function (req, res) {
     res.sendFile(__dirname + "/public/index.html");
 });
@@ -49,7 +51,7 @@ app.get("/api/notes/:id", function (req, res) {
     for (let i = 0; i < notesDB.length; i++) {
         // If we get a match, send it off
         if (notesDB[i].title == id) {
-            return res.send(notesDB[i])
+            return res.json(notesDB[i])
         }
     }
 
@@ -58,12 +60,16 @@ app.get("/api/notes/:id", function (req, res) {
 });
 
 app.get("/api/notes", function(req, res) {
-    res.sendFile(dbPath);
+    res.json(dbPath);
 })
 
 app.get("*", function (req, res) {
     res.sendFile(__dirname + "/public/index.html");
 });
+
+// POST
+
+app.post("")
 
 
 // ===============================
@@ -87,6 +93,7 @@ function storeDB(dbref) {
     fs.writeFile(dbPath,JSON.stringify(dbref),"utf8",err=>{if (err) throw err});
 }
 
+// This function reads the database, then returns the information
 function readDB() {
     return JSON.parse(fs.readFileSync(dbPath,"utf8",err=>{if (err) throw err}));
 }
