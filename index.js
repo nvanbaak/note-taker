@@ -5,7 +5,7 @@ const express = require('express');
 const fs = require("fs")
 
 // Define path to notes
-const dbPath = __dirname + "/public/db.json";
+const dbPath = __dirname + "/db/db.json";
 
 // ======================================
 //          EXPRESS BOILERPLATE
@@ -36,7 +36,7 @@ app.get("/", function (req, res) {
     res.sendFile(__dirname + "/public/index.html");
 });
 
-app.get("/notes", function (req, res) {
+app.get("/notes/", function (req, res) {
     res.sendFile(__dirname + "/public/notes.html");
 });
 
@@ -53,6 +53,7 @@ app.get("/api/notes/:id", function (req, res) {
     for (let i = 0; i < notesDB.length; i++) {
         // If we get a match, send it off
         if (notesDB[i].title == id) {
+            console.log(notesDB[i]);
             return res.json(notesDB[i])
         }
     }
@@ -61,8 +62,12 @@ app.get("/api/notes/:id", function (req, res) {
     res.send("Sorry, that note doesn't exist");
 });
 
-app.get("/api/notes", function(req, res) {
-    res.json(dbPath);
+app.get("/api/notes/", function(req, res) {
+
+    // Get the database
+    let notesDB = readDB();
+
+    res.json(notesDB);
 })
 
 app.get("*", function (req, res) {
@@ -76,7 +81,7 @@ app.post("/api/notes", function (req, res) {
     // Make an object using the data sent
     let newNote = {
         title:req.body.title,
-        content:req.title.content
+        content:req.body.text
     }
 
     // Load the database
@@ -84,6 +89,9 @@ app.post("/api/notes", function (req, res) {
 
     // Push to database
     db.push(newNote);
+
+    // Save database
+    storeDB(db);
 
     res.send("POST request received!")
 });
