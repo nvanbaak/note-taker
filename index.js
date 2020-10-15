@@ -18,6 +18,8 @@ const PORT = process.env.PORT || 9164;
 app.use(express.urlencoded({ extended: true })); // application/x-www-form-urlencoded
 app.use(express.json()); // application/json
 
+app.use(express.static('public')) // use static files
+
 // Listener function
 app.listen(PORT, function() {
     console.log('Listening on http://localhost:' + PORT);
