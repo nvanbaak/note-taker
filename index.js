@@ -81,7 +81,7 @@ app.post("/api/notes", function (req, res) {
     // Make an object using the data sent
     let newNote = {
         title:req.body.title,
-        content:req.body.text
+        text:req.body.text
     }
 
     // Load the database
@@ -133,7 +133,7 @@ app.delete("/api/notes/:id", function (req, res) {
 if (!fs.existsSync(dbPath)) {
     let notesDB = [{
         title:"Welcome!",
-        content:"Check out the readme for information on app functionality1"
+        text:"Check out the readme for information on app functionality1"
     }];
 
     storeDB(notesDB);
