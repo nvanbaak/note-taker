@@ -26,7 +26,9 @@ Clicking the start button will take you to the main page for the app.  From ther
 
 * Created by https://github.com/nvanbaak/
 
+## Check out the deployed site on heroku!
 
+> https://notebook-peon.herokuapp.com/
 
 ## License
 
