@@ -59,7 +59,7 @@ router.post("/api/notes",(req,res) => {
 })
 
 // DELETE route for a note with a given id
-router.delete("api/notes/:id", (req, res)=> {
+router.delete("/api/notes/:id", (req, res)=> {
 
     // First, load up the database
     let db = JSON.parse(fs.readFileSync("db/db.json", "utf8", (err, data) => {
@@ -69,7 +69,7 @@ router.delete("api/notes/:id", (req, res)=> {
     // Then run through it checking for the id to kill
     let targetIndex;
     for (let i = 0; i < db.length; i++) {
-        if (db[i].id === req.params.id) {
+        if (db[i].id == req.params.id) {
             targetIndex = i;
         }
     }
@@ -81,6 +81,8 @@ router.delete("api/notes/:id", (req, res)=> {
     fs.writeFileSync("db/db.json", JSON.stringify(db), "utf8", (err, data) => {
         if (err) throw err;
     })
+
+    res.status(200).send(req.params.id);
 })
 
 router.get("*", (req, res) => {
